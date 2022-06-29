@@ -1,7 +1,8 @@
 let container = document.querySelector('.row');
 let url = `https://api.themoviedb.org/3/movie/popular?api_key=6eb2565464bf5c857dc472303c073583&language=en-US&page=1`;
-
 let urlImages = `https://image.tmdb.org/t/p/w500/`;
+
+let spinner = document.querySelector('.spinner')
 loadAPI(url);
 
 function loadAPI(url){
@@ -14,6 +15,7 @@ function loadAPI(url){
 }
 
 function showData(datosJson){
+    spinner.style.display="none";
     datosJson.forEach(data => {
         container.innerHTML+=`
         <div class="col">
