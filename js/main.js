@@ -3,7 +3,41 @@ let url = `https://api.themoviedb.org/3/movie/popular?api_key=6eb2565464bf5c857d
 let urlImages = `https://image.tmdb.org/t/p/w500/`;
 
 let spinner = document.querySelector('.spinner')
+
+let sw = document.querySelector('#theme')
+let theme = document.querySelector('#themeCSS')
+let textTheme = document.querySelector('#textTheme')
+
 loadAPI(url);
+readTheme();
+function readTheme(){
+    if(JSON.parse(localStorage.getItem("theme"))){
+        theme.setAttribute("href","css/dark.css")
+        textTheme.textContent = "Theme Light";
+        textTheme.style.color="#f8f9fa";
+        sw.checked = JSON.parse(localStorage.getItem("theme"))
+    }else{
+        theme.setAttribute("href","css/light.css")
+        textTheme.textContent = "Theme Dark";
+        textTheme.style.color="#343a40";
+        sw.checked = JSON.parse(localStorage.getItem("theme"))
+        }
+}
+
+sw.addEventListener("change",()=>{
+    if(sw.checked){
+        theme.setAttribute("href","css/dark.css")
+        textTheme.textContent = "Theme Light";
+        textTheme.style.color="#f8f9fa";
+        localStorage.setItem("theme", sw.checked);
+    }else{
+        theme.setAttribute("href","css/light.css")
+        textTheme.textContent = "Theme Dark";
+        textTheme.style.color="#343a40";
+        localStorage.setItem("theme", sw.checked);
+    }
+})
+
 
 function loadAPI(url){
     fetch(url)
